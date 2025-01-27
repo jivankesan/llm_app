@@ -5,6 +5,7 @@ import openai
 
 from ..database import SessionLocal
 from ..models import ChatHistory
+import time
 
 router = APIRouter()
 model = None
@@ -66,9 +67,10 @@ async def generate_response(
         )
 
         model_response_text = response.choices[0].text.strip()
-    
     else:
         model_response_text = "Model not found"
+    
+    time.sleep(2)
 
     # Store in the database
     chat_record = ChatHistory(
